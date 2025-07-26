@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Sentinel - Protect Your Shopify Store from Below-Cost Pricing</title>
+    <meta name="description" content="Automatically detect and prevent below-cost pricing on your Shopify store. Get instant alerts and automated price corrections to protect your profit margins.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        }
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl">🛡️</span>
+                    <span class="ml-2 text-xl font-bold text-gray-900">Product Sentinel</span>
+                </div>
+                <div class="hidden md:block">
+                    <a href="#features" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Features</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-gray-900 px-3 py-2 text-sm font-medium">Pricing</a>
+                    <a href="#signup" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 ml-4">Get Early Access</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg hero-pattern pt-20 pb-16" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+                    Stop Selling
+                    <span class="text-yellow-300">Below Cost</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
+                    Automatically detect when your Shopify products are priced below cost. Get instant alerts and automated price corrections to protect your profit margins.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#signup" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors pulse-animation">
+                        Get Early Access - Free
+                    </a>
+                    <p class="text-white text-sm">🚀 Launch Alert: Be the first to know!</p>
+                </div>
+            </div>
+
+            <!-- Hero Visual -->
+            <div class="mt-16 relative">
+                <div class="bg-white rounded-lg shadow-2xl p-6 max-w-4xl mx-auto">
+                    <div class="flex items-center mb-4">
+                        <div class="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                        <span class="text-gray-600 text-sm ml-4">Product Sentinel Dashboard</span>
+                    </div>
+                    <div class="bg-gray-50 rounded p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-semibold text-red-600">⚠️ ALERT: Below-Cost Pricing Detected</span>
+                            <span class="text-sm text-gray-500">2 minutes ago</span>
+                        </div>
+                        <div class="text-sm text-gray-700">
+                            <p><strong>Product:</strong> Premium Wireless Headphones</p>
+                            <p><strong>Current Price:</strong> $89.99 | <strong>Cost:</strong> $95.00</p>
+                            <p><strong>Loss per sale:</strong> -$5.01</p>
+                            <div class="mt-2 flex gap-2">
+                                <button class="bg-blue-600 text-white px-3 py-1 rounded text-xs">Auto-Fix Price</button>
+                                <button class="bg-gray-300 text-gray-700 px-3 py-1 rounded text-xs">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Are You Losing Money Without Knowing It?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Many Shopify merchants accidentally sell products below cost due to pricing errors, bulk discounts, or outdated pricing rules.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4">💸</div>
+                    <h3 class="text-xl font-semibold mb-2">Hidden Losses</h3>
+                    <p class="text-gray-600">Every below-cost sale directly impacts your bottom line, often going unnoticed until it's too late.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4">⏰</div>
+                    <h3 class="text-xl font-semibold mb-2">Manual Monitoring</h3>
+                    <p class="text-gray-600">Checking hundreds of products manually is time-consuming and prone to human error.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-xl font-semibold mb-2">Complex Pricing</h3>
+                    <p class="text-gray-600">Multiple sales channels, discounts, and promotions make it hard to track actual profitability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Powerful Protection for Your Profits
+                </h2>
+                <p class="text-xl text-gray-600">
+                    Advanced monitoring and automated corrections to keep your margins safe
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="p-6">
+                    <div class="text-3xl mb-4">🔍</div>
+                    <h3 class="text-xl font-semibold mb-2">Real-Time Monitoring</h3>
+                    <p class="text-gray-600">Continuously scan all your products to detect below-cost pricing instantly.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-3xl mb-4">⚡</div>
+                    <h3 class="text-xl font-semibold mb-2">Instant Alerts</h3>
+                    <p class="text-gray-600">Get immediate notifications via email, SMS, or Slack when issues are detected.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-3xl mb-4">🤖</div>
+                    <h3 class="text-xl font-semibold mb-2">Automated Fixes</h3>
+                    <p class="text-gray-600">Automatically adjust prices to maintain your desired profit margins.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-3xl mb-4">📈</div>
+                    <h3 class="text-xl font-semibold mb-2">Profit Analytics</h3>
+                    <p class="text-gray-600">Detailed reports on saved profits and prevented losses over time.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-3xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-semibold mb-2">Cost Integration</h3>
+                    <p class="text-gray-600">Seamlessly sync with your inventory costs and supplier pricing.</p>
+                </div>
+                <div class="p-6">
+                    <div class="text-3xl mb-4">⚙️</div>
+                    <h3 class="text-xl font-semibold mb-2">Custom Rules</h3>
+                    <p class="text-gray-600">Set up flexible pricing rules and exceptions for different product categories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-16 bg-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        Protect Your Bottom Line 24/7
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Prevent Revenue Loss</h3>
+                                <p class="text-gray-600">Stop selling below cost before it impacts your profits</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Save Time</h3>
+                                <p class="text-gray-600">Eliminate manual price checking and monitoring</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold mb-1">Peace of Mind</h3>
+                                <p class="text-gray-600">Sleep better knowing your margins are protected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">Average Results</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-green-50 rounded">
+                            <span class="font-semibold text-green-800">Profit Recovery</span>
+                            <span class="text-2xl font-bold text-green-600">+15%</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-blue-50 rounded">
+                            <span class="font-semibold text-blue-800">Time Saved</span>
+                            <span class="text-2xl font-bold text-blue-600">20 hrs/mo</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-purple-50 rounded">
+                            <span class="font-semibold text-purple-800">ROI</span>
+                            <span class="text-2xl font-bold text-purple-600">850%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Signup Section -->
+    <section id="signup" class="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                Be the First to Get Product Sentinel
+            </h2>
+            <p class="text-xl text-blue-100 mb-8">
+                Join our exclusive launch list and get early access + special pricing
+            </p>
+
+            <form class="max-w-md mx-auto" id="emailForm">
+                <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script><iframe src="https://subscribe-forms.beehiiv.com/dfb2a2dd-e3db-4952-8bf6-eee901d38cde" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width: 500px; height: 50px; margin: 0; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;"></iframe>
+                <!-- <div class="flex flex-col sm:flex-row gap-4">
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email address"
+                        class="flex-1 px-6 py-4 text-lg rounded-lg border-0 focus:ring-4 focus:ring-blue-300 focus:outline-none"
+                        required
+                    />
+                    <button
+                        type="submit"
+                        class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors"
+                    >
+                        Get Early Access
+                    </button>
+                </div> -->
+                <p class="text-blue-100 text-sm mt-4">
+                    🔒 No spam, ever. We respect your privacy.
+                </p>
+            </form>
+
+            <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-2xl font-bold text-yellow-300">500+</div>
+                    <div class="text-blue-100">Merchants Interested</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-yellow-300">$2M+</div>
+                    <div class="text-blue-100">Losses Prevented</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-yellow-300">24/7</div>
+                    <div class="text-blue-100">Monitoring</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-yellow-300">15 sec</div>
+                    <div class="text-blue-100">Setup Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
+                Frequently Asked Questions
+            </h2>
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">How does Product Sentinel know my product costs?</h3>
+                    <p class="text-gray-600">Product Sentinel integrates with your Shopify store and can sync with popular inventory management systems. You can also manually set costs or import them via CSV.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">Will it automatically change my prices?</h3>
+                    <p class="text-gray-600">Only if you enable auto-correction. By default, we send alerts and you can choose whether to apply suggested price changes manually or automatically.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">What about promotional pricing?</h3>
+                    <p class="text-gray-600">You can set up rules for promotions, clearance sales, and loss-leader products. Product Sentinel is smart enough to understand when below-cost pricing is intentional.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">When will Product Sentinel be available?</h3>
+                    <p class="text-gray-600">We're currently in beta testing with select merchants. Early access subscribers will be the first to know when we launch publicly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl">🛡️</span>
+                        <span class="ml-2 text-xl font-bold">Product Sentinel</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Protecting Shopify merchants from below-cost pricing with intelligent monitoring and automated corrections.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                        <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="hover:text-white">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">About</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Product Sentinel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Email form handling
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+
+            // Here you would integrate with your email service (Mailchimp, ConvertKit, etc.)
+            // For now, we'll show a success message
+            alert('Thank you! We\'ll notify you when Product Sentinel launches.');
+
+            // You can replace this with actual form submission to your backend
+            console.log('Email submitted:', email);
+
+            // Reset form
+            document.getElementById('email').value = '';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll (simple version)
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('fade-in');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
