@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — ProductSentinel</title>
+    <meta name="description" content="How ProductSentinel collects, uses, stores, and protects your data. Our privacy commitments for Shopify merchants and visitors.">
+
+    <!-- Favicon (brand app mark) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' style='background:%23003F91'%3E%3Cg transform='translate(15, 15) scale(0.7)'%3E%3Crect x='13' y='27' width='74' height='46' rx='15' fill='none' stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='28' y='40' width='12' height='20' rx='6' fill='%23FFFFFF'/%3E%3Crect x='30' y='43' width='3' height='14' rx='1.5' fill='%23ffffff' opacity='0.4'/%3E%3Crect x='60' y='40' width='12' height='20' rx='6' fill='%23FFFFFF'/%3E%3Crect x='62' y='43' width='3' height='14' rx='1.5' fill='%23ffffff' opacity='0.4'/%3E%3Cpath d='M47 40 C 47 37, 53 37, 53 40 L 53 54 C 53 57, 47 57, 47 54 Z' fill='%23FFFFFF' opacity='0.25'/%3E%3Ccircle cx='50' cy='51' r='2' fill='%23FFFFFF' opacity='0.75'/%3E%3Ccircle cx='25' cy='39' r='2' fill='%23FFFFFF'/%3E%3Ccircle cx='75' cy='39' r='2' fill='%23FFFFFF'/%3E%3C/g%3E%3C/svg%3E">
+
+    <!-- Fonts: Inter (brand primary) + JetBrains Mono (figures) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue:    { brand: '#003F91' },
+                        sky:     { brand: '#5DA9E9' },
+                        mint:    { brand: '#E5F4E3' },
+                        plum:    { brand: '#6D326D' },
+                        ink:     { 900: '#0B1B2B', 700: '#3A4A5A', 400: '#8A99A8', 200: '#E3E8EE', 50: '#F6F8FA' },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    boxShadow: {
+                        soft: '0 1px 2px rgba(11,27,43,.04), 0 8px 24px rgba(11,27,43,.06)',
+                        card: '0 1px 3px rgba(11,27,43,.06), 0 12px 40px rgba(11,27,43,.08)',
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --ps-blue: #003F91; --ps-sky: #5DA9E9; --ps-mint: #E5F4E3;
+            --ps-plum: #6D326D; --ps-neutral-900: #0B1B2B; --ps-neutral-700: #3A4A5A;
+            --ps-neutral-400: #8A99A8; --ps-neutral-200: #E3E8EE; --ps-neutral-50: #F6F8FA;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; color: #0B1B2B; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.15; }
+        .nav-link { color: var(--ps-neutral-700); transition: color .15s; }
+        .nav-link:hover { color: var(--ps-blue); }
+
+        /* Legal prose */
+        .prose h2 { font-size: 1.375rem; font-weight: 700; color: var(--ps-neutral-900); margin-top: 2.75rem; margin-bottom: .75rem; scroll-margin-top: 6rem; }
+        .prose h3 { font-size: 1.0625rem; font-weight: 600; color: var(--ps-neutral-900); margin-top: 1.75rem; margin-bottom: .5rem; }
+        .prose p { color: var(--ps-neutral-700); line-height: 1.75; margin-bottom: 1rem; font-size: 15px; }
+        .prose ul { margin: 0 0 1.25rem; padding-left: 1.25rem; list-style: disc; }
+        .prose li { color: var(--ps-neutral-700); line-height: 1.7; margin-bottom: .5rem; font-size: 15px; }
+        .prose a { color: var(--ps-blue); text-decoration: underline; text-underline-offset: 2px; }
+        .prose strong { color: var(--ps-neutral-900); font-weight: 600; }
+        .prose table { width: 100%; border-collapse: collapse; margin: 0 0 1.5rem; font-size: 14px; }
+        .prose th, .prose td { border: 1px solid var(--ps-neutral-200); padding: .625rem .75rem; text-align: left; vertical-align: top; }
+        .prose th { background: var(--ps-neutral-50); font-weight: 600; color: var(--ps-neutral-900); }
+        .prose td { color: var(--ps-neutral-700); }
+    </style>
+</head>
+<body class="bg-white antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed inset-x-0 top-0 z-50 border-b border-ink-200/70 bg-white/85 backdrop-blur">
+        <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
+            <a href="/" class="flex items-center gap-2.5">
+                <svg viewBox="0 0 100 100" class="h-9 w-9 rounded-[10px]" style="background:#003F91" aria-hidden="true">
+                    <g transform="translate(15, 15) scale(0.7)">
+                        <rect x="13" y="27" width="74" height="46" rx="15" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="28" y="40" width="12" height="20" rx="6" fill="#FFFFFF"/>
+                        <rect x="30" y="43" width="3" height="14" rx="1.5" fill="#ffffff" opacity="0.4"/>
+                        <rect x="60" y="40" width="12" height="20" rx="6" fill="#FFFFFF"/>
+                        <rect x="62" y="43" width="3" height="14" rx="1.5" fill="#ffffff" opacity="0.4"/>
+                        <path d="M47 40 C 47 37, 53 37, 53 40 L 53 54 C 53 57, 47 57, 47 54 Z" fill="#FFFFFF" opacity="0.25"/>
+                        <circle cx="50" cy="51" r="2" fill="#FFFFFF" opacity="0.75"/>
+                        <circle cx="25" cy="39" r="2" fill="#FFFFFF"/>
+                        <circle cx="75" cy="39" r="2" fill="#FFFFFF"/>
+                    </g>
+                </svg>
+                <span class="text-[17px] tracking-tight text-blue-brand" style="font-weight:700">Product<span style="font-weight:400">Sentinel</span></span>
+            </a>
+            <div class="hidden items-center gap-8 md:flex">
+                <a href="/#how" class="nav-link text-sm font-medium">How it works</a>
+                <a href="/#features" class="nav-link text-sm font-medium">Features</a>
+                <a href="/#proof" class="nav-link text-sm font-medium">The proof</a>
+                <a href="/#faq" class="nav-link text-sm font-medium">FAQ</a>
+            </div>
+            <a href="https://apps.shopify.com/productsentinel" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg bg-blue-brand px-4 py-2 text-sm font-medium text-white transition hover:bg-[#00347a]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                Install on Shopify
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="border-b border-ink-200 bg-ink-50 pt-28 pb-12 sm:pt-32 sm:pb-14">
+        <div class="mx-auto max-w-3xl px-5 sm:px-8">
+            <p class="text-sm font-semibold uppercase tracking-widest text-sky-brand">Legal</p>
+            <h1 class="mt-3 text-3xl font-bold text-ink-900 sm:text-4xl">Privacy Policy</h1>
+            <p class="mt-4 text-[15px] leading-relaxed text-ink-700">
+                This policy explains what information ProductSentinel collects, how we use it, who we
+                share it with, and the choices and rights you have. We keep it plain because privacy
+                shouldn't need a lawyer to read.
+            </p>
+            <p class="mt-4 font-mono text-xs text-ink-400">Last updated: June 25, 2026</p>
+        </div>
+    </header>
+
+    <!-- Body -->
+    <main class="bg-white py-14 sm:py-16">
+        <div class="prose mx-auto max-w-3xl px-5 sm:px-8">
+
+            <h2 id="who-we-are">1. Who we are</h2>
+            <p>
+                ProductSentinel ("ProductSentinel", "we", "us", or "our") is a Shopify embedded
+                application that monitors product prices and inventory for Shopify merchants and alerts
+                them — or automatically restores below-cost prices — when something changes. This policy
+                applies to our app, our website at <a href="https://productsentinel.com">productsentinel.com</a>,
+                and the services we provide through them.
+            </p>
+            <p>
+                For the data we process on behalf of a merchant's store, the merchant is the
+                <strong>data controller</strong> and ProductSentinel acts as a <strong>data processor</strong>.
+                For our own website and newsletter, ProductSentinel is the data controller.
+            </p>
+
+            <h2 id="information-we-collect">2. Information we collect</h2>
+
+            <h3>2.1 Store and account data (via Shopify)</h3>
+            <p>When a merchant installs the app through Shopify OAuth, we receive and store:</p>
+            <ul>
+                <li><strong>Store information</strong> — your <span class="font-mono">.myshopify.com</span> domain, store name, primary locale, and subscription/billing status.</li>
+                <li><strong>Authentication tokens</strong> — the OAuth access token Shopify issues so the app can read and update the data you authorize.</li>
+                <li><strong>Contact details</strong> — the email address you enter in the app's settings to receive alerts.</li>
+                <li><strong>App configuration</strong> — your low-stock thresholds, automation toggles, and notification preferences.</li>
+            </ul>
+
+            <h3>2.2 Product and inventory data</h3>
+            <p>To do its job, the app reads and stores product-level data from your store, including:</p>
+            <ul>
+                <li>Products, variants, SKUs, and prices;</li>
+                <li>Inventory quantities and locations;</li>
+                <li>Cost-per-item values; and</li>
+                <li>A log of the price and inventory changes we detect and the actions we take (our activity/alert history).</li>
+            </ul>
+            <p>
+                ProductSentinel is built to watch <strong>your own store's</strong> catalog and stock. It is
+                not a buyer-facing tool and does not monitor competitors.
+            </p>
+
+            <h3>2.3 Customer personal data</h3>
+            <p>
+                ProductSentinel's core features operate on products, prices, and inventory — <strong>not</strong>
+                on your shoppers' personal data. We do not request the <span class="font-mono">read_customers</span>
+                scope and do not store customer names, addresses, or order contents. The only customer-related
+                data we may process are the identifiers contained in Shopify's mandatory GDPR compliance webhooks
+                (see <a href="#your-rights">Section 9</a>), which we handle to honor data requests and erasure.
+            </p>
+
+            <h3>2.4 Website and newsletter data</h3>
+            <ul>
+                <li>If you submit your email address through the form on our website, we store that address to send you product updates and protection tips. You can unsubscribe at any time.</li>
+                <li>Like most websites, our hosting and CDN providers automatically process standard technical data (such as IP address, browser type, and request logs) to deliver and secure the site.</li>
+            </ul>
+
+            <h2 id="how-we-use">3. How we use information</h2>
+            <p>We use the data above to:</p>
+            <ul>
+                <li>Monitor your prices and inventory in real time and detect below-cost prices or low stock;</li>
+                <li>Send you alert emails and, where you have enabled it, automatically restore a price you previously set;</li>
+                <li>Keep your cost data in sync with Shopify;</li>
+                <li>Provide your dashboard, products view, and activity history;</li>
+                <li>Operate billing and confirm your subscription status through Shopify;</li>
+                <li>Provide support, fix bugs, and improve the app;</li>
+                <li>Send newsletter messages you have opted into; and</li>
+                <li>Comply with legal obligations and Shopify's platform requirements.</li>
+            </ul>
+            <p>We do <strong>not</strong> sell your data, and we do <strong>not</strong> use it for advertising.</p>
+
+            <h2 id="legal-bases">4. Legal bases (EEA/UK)</h2>
+            <p>Where the GDPR or UK GDPR applies, we rely on the following legal bases:</p>
+            <ul>
+                <li><strong>Performance of a contract</strong> — to provide the app and its monitoring features to the merchant.</li>
+                <li><strong>Legitimate interests</strong> — to secure, maintain, and improve our service.</li>
+                <li><strong>Consent</strong> — for newsletter emails, which you can withdraw at any time.</li>
+                <li><strong>Legal obligation</strong> — to meet record-keeping and platform-compliance requirements.</li>
+            </ul>
+
+            <h2 id="sharing">5. How we share data &amp; subprocessors</h2>
+            <p>
+                We do not sell your information. We share it only with the service providers
+                ("subprocessors") we use to run ProductSentinel, each bound to protect it:
+            </p>
+            <table>
+                <thead>
+                    <tr><th>Provider</th><th>Purpose</th><th>Data involved</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Shopify</td><td>App platform, OAuth, billing, GDPR webhooks</td><td>Store, product, inventory, and subscription data</td></tr>
+                    <tr><td>Google Cloud Platform</td><td>Application hosting &amp; databases (Cloud Run, Datastore)</td><td>All app data described above</td></tr>
+                    <tr><td>Mandrill (Mailchimp Transactional)</td><td>Sending alert &amp; notification emails</td><td>Recipient email address and alert content</td></tr>
+                    <tr><td>Cloudflare</td><td>DNS &amp; website delivery/security</td><td>Technical request data</td></tr>
+                </tbody>
+            </table>
+            <p>
+                We may also disclose information if required by law, to enforce our terms, or to protect the
+                rights, safety, and security of our users and our service. If ProductSentinel is involved in a
+                merger, acquisition, or asset sale, data may be transferred as part of that transaction; we will
+                notify affected users.
+            </p>
+
+            <h2 id="retention">6. Data retention</h2>
+            <p>
+                We keep store and product data for as long as the app is installed and your account is active.
+                When you uninstall the app, Shopify revokes our access and we delete or anonymize the associated
+                store data within <strong>30 days</strong>, except where we must retain limited records to meet
+                legal obligations. We act on Shopify's <span class="font-mono">shop/redact</span> webhook (sent
+                ~48 hours after uninstall) to erase shop data. Newsletter addresses are kept until you unsubscribe.
+            </p>
+
+            <h2 id="security">7. Data security</h2>
+            <p>
+                We protect your data with industry-standard measures: encryption in transit (HTTPS/TLS), access
+                tokens stored server-side and never exposed to the browser, hosting on Google Cloud's secured
+                infrastructure, scoped access (we request only the Shopify permissions the app needs), and
+                signature verification (HMAC) on every Shopify webhook. No method of transmission or storage is
+                100% secure, but we work to safeguard your information and limit who can access it.
+            </p>
+
+            <h2 id="international">8. International data transfers</h2>
+            <p>
+                Our infrastructure and subprocessors may process data in the United States and other countries.
+                Where data is transferred out of the EEA, UK, or Switzerland, we rely on appropriate safeguards
+                such as the European Commission's Standard Contractual Clauses provided by our subprocessors.
+            </p>
+
+            <h2 id="your-rights">9. Your rights &amp; Shopify GDPR webhooks</h2>
+            <p>
+                Depending on where you live (for example, under the GDPR or the California CCPA/CPRA), you may have
+                the right to access, correct, export, restrict, or delete your personal data, to object to certain
+                processing, and to withdraw consent. To exercise these rights, contact us at
+                <a href="mailto:support@productsentinel.com">support@productsentinel.com</a>. You also have the right
+                to lodge a complaint with your local data protection authority.
+            </p>
+            <p>
+                ProductSentinel implements Shopify's mandatory privacy webhooks so that requests routed through a
+                store are honored automatically:
+            </p>
+            <ul>
+                <li><strong><span class="font-mono">customers/data_request</span></strong> — we compile any data we hold related to the request and provide it to the merchant.</li>
+                <li><strong><span class="font-mono">customers/redact</span></strong> — we delete any data associated with the identified customer.</li>
+                <li><strong><span class="font-mono">shop/redact</span></strong> — we delete the store's data after the app is uninstalled.</li>
+            </ul>
+            <p>
+                Because shoppers interact with the merchant's store rather than with us directly, individuals should
+                usually direct privacy requests to the store they shopped with; the merchant can then route the request
+                through Shopify to us.
+            </p>
+
+            <h2 id="cookies">10. Cookies</h2>
+            <p>
+                Our marketing website uses only the minimal cookies needed to load fonts and deliver the page; it does
+                not run advertising or cross-site tracking cookies. Inside the embedded app, Shopify and our session
+                layer use strictly necessary cookies to keep you authenticated and the app functioning.
+            </p>
+
+            <h2 id="children">11. Children's privacy</h2>
+            <p>
+                ProductSentinel is a business tool intended for merchants and is not directed to children. We do not
+                knowingly collect personal data from anyone under 16. If you believe a child has provided us data,
+                contact us and we will delete it.
+            </p>
+
+            <h2 id="changes">12. Changes to this policy</h2>
+            <p>
+                We may update this policy from time to time. When we do, we will revise the "Last updated" date above
+                and, for material changes, take reasonable steps to notify you. Your continued use of ProductSentinel
+                after an update means you accept the revised policy.
+            </p>
+
+            <h2 id="contact">13. Contact us</h2>
+            <p>
+                Questions, requests, or concerns about this policy or your data? Reach us at
+                <a href="mailto:support@productsentinel.com">support@productsentinel.com</a>. We aim to respond within
+                30 days.
+            </p>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-ink-200 bg-ink-50">
+        <div class="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+            <div class="flex flex-col justify-between gap-10 sm:flex-row">
+                <div class="max-w-sm">
+                    <a href="/" class="flex items-center gap-2.5">
+                        <svg viewBox="0 0 100 100" class="h-8 w-8 rounded-lg" style="background:#003F91" aria-hidden="true"><g transform="translate(15, 15) scale(0.7)"><rect x="13" y="27" width="74" height="46" rx="15" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="28" y="40" width="12" height="20" rx="6" fill="#FFFFFF"/><rect x="30" y="43" width="3" height="14" rx="1.5" fill="#ffffff" opacity="0.4"/><rect x="60" y="40" width="12" height="20" rx="6" fill="#FFFFFF"/><rect x="62" y="43" width="3" height="14" rx="1.5" fill="#ffffff" opacity="0.4"/><path d="M47 40 C 47 37, 53 37, 53 40 L 53 54 C 53 57, 47 57, 47 54 Z" fill="#FFFFFF" opacity="0.25"/><circle cx="50" cy="51" r="2" fill="#FFFFFF" opacity="0.75"/><circle cx="25" cy="39" r="2" fill="#FFFFFF"/><circle cx="75" cy="39" r="2" fill="#FFFFFF"/></g></svg>
+                        <span class="text-base text-blue-brand" style="font-weight:700">Product<span style="font-weight:400">Sentinel</span></span>
+                    </a>
+                    <p class="mt-4 text-[15px] leading-relaxed text-ink-700">
+                        Your store's silent guardian. Watching your Shopify prices and inventory,
+                        fixing costly mistakes before they cost you.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-12 sm:gap-16">
+                    <div>
+                        <h4 class="text-sm font-semibold text-ink-900">Product</h4>
+                        <ul class="mt-4 space-y-3 text-[15px]">
+                            <li><a href="/#how" class="nav-link">How it works</a></li>
+                            <li><a href="/#features" class="nav-link">Features</a></li>
+                            <li><a href="/#proof" class="nav-link">The proof</a></li>
+                            <li><a href="/#faq" class="nav-link">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-ink-900">Company</h4>
+                        <ul class="mt-4 space-y-3 text-[15px]">
+                            <li><a href="https://apps.shopify.com/productsentinel" target="_blank" rel="noopener" class="nav-link">Install</a></li>
+                            <li><a href="/privacy-policy" class="nav-link">Privacy</a></li>
+                            <li><a href="#" class="nav-link">Terms</a></li>
+                            <li><a href="mailto:support@productsentinel.com" class="nav-link">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-ink-200 pt-8 sm:flex-row">
+                <p class="text-sm text-ink-400">© 2026 ProductSentinel. All rights reserved.</p>
+                <p class="text-sm text-ink-400">A Shopify app · Made for merchants who'd rather sleep well.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
