@@ -21,8 +21,10 @@
     leadEndpoint: "",
     /** TODO: script del widget de chat. Debe llamar a window.landingTrack("chat_start"). */
     chatScriptSrc: "",
-    /** TODO: video del producto (YouTube, Vimeo o .mp4). */
-    videoUrl: "",
+    /** Video "ProductSentinel en un minuto" (56 s, 1080p). Acepta YouTube, Vimeo o .mp4. */
+    videoUrl: "/assets/video/productsentinel-en-un-minuto.mp4",
+    /** Miniatura del video (solo para .mp4). */
+    videoPoster: "/assets/video/productsentinel-en-un-minuto.jpg",
     /** TODO: precio nuevo ajustado a Latinoamérica, en USD/mes. null = "por confirmar". */
     monthlyUsd: null,
     /** TODO: oferta de Black Friday, ej. { monthlyUsd: 9, label: "Oferta Black Friday" }. null = sin oferta. */
@@ -119,6 +121,7 @@
       if (/\.(mp4|webm)(\?|$)/i.test(url)) {
         el = document.createElement("video");
         el.src = url; el.controls = true; el.playsInline = true; el.preload = "metadata";
+        if (CONFIG.videoPoster) el.poster = CONFIG.videoPoster;
         el.setAttribute("aria-label", title);
       } else if (yt || vm) {
         el = document.createElement("iframe");
