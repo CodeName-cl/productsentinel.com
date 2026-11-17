@@ -1,0 +1,70 @@
+/* Estilos compartidos de las landings de campaña (/black, /navidad).
+   Mismos tokens de marca que la portada (manual-de-marca.md). */
+:root {
+    --ps-blue: #003F91; --ps-sky: #5DA9E9; --ps-mint: #E5F4E3;
+    --ps-plum: #6D326D; --ps-neutral-900: #0B1B2B; --ps-neutral-700: #3A4A5A;
+    --ps-neutral-400: #8A99A8; --ps-neutral-200: #E3E8EE; --ps-neutral-50: #F6F8FA;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { font-family: 'Inter', system-ui, sans-serif; color: #0B1B2B; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.12; }
+:focus-visible { outline: 2px solid var(--ps-blue); outline-offset: 2px; }
+
+/* Igual que la portada: fondo calmado, nunca ruidoso */
+.hero-wash {
+    background:
+        radial-gradient(60rem 32rem at 82% -10%, rgba(93,169,233,.12), transparent 60%),
+        radial-gradient(50rem 30rem at 8% 0%, rgba(0,63,145,.05), transparent 55%),
+        #ffffff;
+}
+/* Variante de Navidad: mismo lenguaje, con un toque menta (sin rojo: el manual lo prohíbe en landing) */
+.hero-wash-xmas {
+    background:
+        radial-gradient(60rem 32rem at 82% -10%, rgba(93,169,233,.16), transparent 60%),
+        radial-gradient(46rem 28rem at 4% 100%, rgba(229,244,227,.9), transparent 60%),
+        #ffffff;
+}
+.grid-faint {
+    background-image:
+        linear-gradient(to right, rgba(11,27,43,.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(11,27,43,.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 75%);
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 75%);
+}
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+.price-unit { font-size: 1rem; font-weight: 500; color: var(--ps-neutral-700); letter-spacing: 0; }
+
+/* Formulario */
+.field { border: 0; margin: 0 0 18px; padding: 0; min-width: 0; }
+.field label, .field legend { display: block; font-weight: 600; font-size: .9375rem; color: var(--ps-neutral-900); margin-bottom: 8px; padding: 0; }
+.field input[type="text"], .field input[type="email"] {
+    width: 100%; min-height: 48px; padding: 12px 14px;
+    font: inherit; font-size: 16px; color: var(--ps-neutral-900);
+    border: 1.5px solid var(--ps-neutral-200); border-radius: 12px; background: #fff;
+    transition: border-color .15s, box-shadow .15s;
+}
+.field input::placeholder { color: var(--ps-neutral-400); }
+.field input:focus { outline: none; border-color: var(--ps-blue); box-shadow: 0 0 0 4px rgba(0,63,145,.08); }
+.field input[aria-invalid="true"] { border-color: #C0392B; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; margin: 0 !important; font-weight: 500 !important; }
+.chip input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.chip span {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 10px 16px;
+    border: 1.5px solid var(--ps-neutral-200); border-radius: 999px; color: var(--ps-neutral-700); background: #fff;
+    transition: border-color .15s, background .15s;
+}
+.chip input:checked + span { border-color: var(--ps-blue); background: var(--ps-mint); color: var(--ps-blue); font-weight: 600; }
+.chip input:focus-visible + span { outline: 2px solid var(--ps-blue); outline-offset: 2px; }
+fieldset[data-invalid="true"] .chip span { border-color: #e8a29b; }
+.hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Preguntas frecuentes */
+.faq-q { display: flex; cursor: pointer; list-style: none; align-items: center; justify-content: space-between; gap: 16px; font-size: 1.0625rem; font-weight: 600; color: var(--ps-neutral-900); }
+.faq-q::-webkit-details-marker { display: none; }
+.faq-icon { flex: none; font-size: 1.5rem; font-weight: 400; line-height: 1; color: var(--ps-neutral-400); transition: transform .2s; }
+details[open] .faq-icon { transform: rotate(45deg); }
