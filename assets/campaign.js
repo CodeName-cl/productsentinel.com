@@ -19,14 +19,16 @@
     /** TODO: URL /exec del Apps Script que guarda los leads en el Google Sheet
      *  (código en el repo web: scripts/leads-apps-script.gs). */
     leadEndpoint: "",
-    /** TODO: script del widget de chat. Debe llamar a window.landingTrack("chat_start"). */
-    chatScriptSrc: "",
+    /** Chat de chat.codename.cl con el space de ProductSentinel.
+     *  TODO: workspace y space (dashboard → Espacios: la clave bajo el nombre es el space).
+     *  Vacíos = no se carga el chat. */
+    chat: { src: "https://chat.codename.cl/widget.js", workspace: "ws_codename", space: "68d69f4f-fe37-4669-81dd-a257835daf02" },
     /** Video "ProductSentinel en un minuto" (56 s, 1080p). Acepta YouTube, Vimeo o .mp4. */
     videoUrl: "/assets/video/productsentinel-en-un-minuto.mp4",
     /** Miniatura del video (solo para .mp4). */
     videoPoster: "/assets/video/productsentinel-en-un-minuto.jpg",
-    /** TODO: precio nuevo ajustado a Latinoamérica, en USD/mes. null = "por confirmar". */
-    monthlyUsd: null,
+    /** Precio del plan en USD/mes (el mismo de la Shopify App Store). null = "por confirmar". */
+    monthlyUsd: 50,
     /** TODO: oferta de Black Friday, ej. { monthlyUsd: 9, label: "Oferta Black Friday" }. null = sin oferta. */
     blackFriday: null,
     blackFridayEnds: "2026-12-01T03:00:00Z", // 30 nov 23:59, hora de Chile
@@ -150,6 +152,8 @@
         entries.forEach(function (en) { en.isIntersecting ? visible.add(en.target) : visible.delete(en.target); });
         sticky.classList.toggle("translate-y-0", visible.size === 0);
         sticky.classList.toggle("translate-y-[110%]", visible.size !== 0);
+        // Sube la burbuja del chat para que no quede tapada por la CTA fija
+        document.documentElement.style.setProperty("--chat-lift", visible.size === 0 ? sticky.offsetHeight + "px" : "0px");
       });
       watch.forEach(function (el) { io.observe(el); });
     }
@@ -169,10 +173,27 @@
     if (form) initForm(form);
 
     // ---- Chat ----
-    if (CONFIG.chatScriptSrc) {
+    var chat = CONFIG.chat;
+    if (chat.workspace && chat.space) {
       var c = document.createElement("script");
-      c.async = true; c.src = CONFIG.chatScriptSrc;
+      c.async = true; c.src = chat.src;
+      c.setAttribute("data-workspace", chat.workspace);
+      c.setAttribute("data-space", chat.space);
       document.body.appendChild(c);
+
+      // chat_start: el widget no emite eventos. Cuando el visitante deja su correo,
+      // el widget guarda la sesión en localStorage; detectamos esa clave nueva.
+      var chatKey = "codename.chat." + chat.workspace + "." + chat.space;
+      var hasSession = function () { try { return !!localStorage.getItem(chatKey); } catch (e) { return false; } };
+      var started = hasSession();
+      document.addEventListener("click", function (e) {
+        if (started || !(e.target.closest && e.target.closest("[data-codename-chat]"))) return;
+        var n = 0;
+        var t = setInterval(function () {
+          if (hasSession()) { started = true; clearInterval(t); window.landingTrack("chat_start"); }
+          else if (++n > 20) clearInterval(t);
+        }, 500);
+      });
     }
   });
 
