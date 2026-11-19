@@ -16,9 +16,9 @@
     gtmId: "GTM-5CWP9SPQ",
     /** TODO: ID del píxel de Meta. Vacío = no se carga. */
     metaPixelId: "",
-    /** TODO: URL /exec del Apps Script que guarda los leads en el Google Sheet
-     *  (código en el repo web: scripts/leads-apps-script.gs). */
-    leadEndpoint: "",
+    /** Apps Script que guarda los leads en el Google Sheet "Leads campaña Navidad 2026"
+     *  (código: marketing/leads-sheet, y copia en el repo web scripts/leads-apps-script.gs). */
+    leadEndpoint: "https://script.google.com/macros/s/AKfycbznpkaag95wVwCcjZRoPF2UwNbFMUba15Mq6zxP3XnykorZqfofA2zKM-V5Bgc1PlhV/exec",
     /** Chat de chat.codename.cl con el space de ProductSentinel.
      *  TODO: workspace y space (dashboard → Espacios: la clave bajo el nombre es el space).
      *  Vacíos = no se carga el chat. */
@@ -209,6 +209,34 @@
       var chatKey = "codename.chat." + chat.workspace + "." + chat.space;
       var hasSession = function () { try { return !!localStorage.getItem(chatKey); } catch (e) { return false; } };
       var started = hasSession();
+
+      // Abrir el chat sin esperar al visitante (cerrado, tiende a ignorarse).
+      // Escritorio: se abre solo a los 8 s. Teléfono: el panel taparía la página,
+      // así que mostramos un aviso junto a la burbuja que lo abre al tocarlo.
+      // Una vez por sesión, y nunca si ya tiene una conversación.
+      (function () {
+        var KEY = "chat_nudged";
+        try { if (sessionStorage.getItem(KEY) || localStorage.getItem(chatKey)) return; } catch (e) { return; }
+        function root() { var h = document.querySelector("[data-codename-chat]"); return h && h.shadowRoot; }
+        function isOpen() { var r = root(); return !!(r && r.querySelector(".panel")); }
+        function open() { var r = root(), b = r && r.querySelector(".bubble"); if (b && !isOpen()) b.click(); }
+        function done() { try { sessionStorage.setItem(KEY, "1"); } catch (e) {} }
+        setTimeout(function () {
+          if (!root() || isOpen()) return done();
+          done();
+          if (matchMedia("(min-width: 768px)").matches) return open();
+          var tip = document.createElement("div");
+          tip.className = "chat-nudge";
+          tip.innerHTML = '<button type="button" class="chat-nudge-open">¿Dudas? Escríbenos</button>'
+            + '<button type="button" class="chat-nudge-x" aria-label="Cerrar aviso">×</button>';
+          document.body.appendChild(tip);
+          tip.querySelector(".chat-nudge-open").onclick = function () { tip.remove(); open(); };
+          tip.querySelector(".chat-nudge-x").onclick = function () { tip.remove(); };
+          document.addEventListener("click", function (e) {
+            if (e.target.closest && e.target.closest("[data-codename-chat]")) tip.remove();
+          });
+        }, 8000);
+      })();
       document.addEventListener("click", function (e) {
         if (started || !(e.target.closest && e.target.closest("[data-codename-chat]"))) return;
         var n = 0;
