@@ -75,3 +75,17 @@ details[open] .faq-icon { transform: rotate(45deg); }
     position: fixed; left: 0; right: 0; bottom: 0; height: 0; z-index: 2147483646;
     transform: translateY(calc(-1 * var(--chat-lift, 0px))); transition: transform .3s ease;
 }
+
+/* Aviso junto a la burbuja del chat (solo teléfono) */
+.chat-nudge {
+    position: fixed; right: 76px; bottom: calc(26px + var(--chat-lift, 0px)); z-index: 2147483645;
+    display: flex; align-items: center; gap: 2px; padding: 4px 4px 4px 14px;
+    background: #fff; border: 1px solid #E3E8EE; border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(11, 27, 43, .14); transition: bottom .3s ease;
+    animation: chat-nudge-in .35s ease;
+}
+.chat-nudge button { border: 0; background: none; cursor: pointer; font: inherit; }
+.chat-nudge-open { font-size: 14px; font-weight: 600; color: var(--ps-blue); padding: 6px 0; }
+.chat-nudge-x { width: 28px; height: 28px; font-size: 18px; line-height: 1; color: #8A99A8; }
+@keyframes chat-nudge-in { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .chat-nudge { animation: none; } }
