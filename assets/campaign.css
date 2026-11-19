@@ -68,3 +68,10 @@ fieldset[data-invalid="true"] .chip span { border-color: #e8a29b; }
 .faq-q::-webkit-details-marker { display: none; }
 .faq-icon { flex: none; font-size: 1.5rem; font-weight: 400; line-height: 1; color: var(--ps-neutral-400); transition: transform .2s; }
 details[open] .faq-icon { transform: rotate(45deg); }
+
+/* Contenedor de la burbuja de chat.codename.cl: fijo y sin alto, para poder
+   subirlo (con su panel) cuando la CTA fija está visible en el teléfono. */
+[data-codename-chat] {
+    position: fixed; left: 0; right: 0; bottom: 0; height: 0; z-index: 2147483646;
+    transform: translateY(calc(-1 * var(--chat-lift, 0px))); transition: transform .3s ease;
+}
