@@ -22,7 +22,11 @@
     /** Chat de chat.codename.cl con el space de ProductSentinel.
      *  TODO: workspace y space (dashboard → Espacios: la clave bajo el nombre es el space).
      *  Vacíos = no se carga el chat. */
-    chat: { src: "https://chat.codename.cl/widget.js", workspace: "ws_codename", space: "68d69f4f-fe37-4669-81dd-a257835daf02" },
+    chat: {
+      src: "https://chat.codename.cl/widget.js", workspace: "ws_codename", space: "68d69f4f-fe37-4669-81dd-a257835daf02",
+      /** Colores de la marca para la burbuja (el widget no tiene opción de tema). */
+      color: "#003F91", hover: "#00347a", rgb: "0, 63, 145",
+    },
     /** Video "ProductSentinel en un minuto" (56 s, 1080p). Acepta YouTube, Vimeo o .mp4. */
     videoUrl: "/assets/video/productsentinel-en-un-minuto.mp4",
     /** Miniatura del video (solo para .mp4). */
@@ -180,6 +184,25 @@
       c.setAttribute("data-workspace", chat.workspace);
       c.setAttribute("data-space", chat.space);
       document.body.appendChild(c);
+
+      // Color de marca: el widget usa Shadow DOM abierto, así que le agregamos una
+      // hoja de estilos propia que pisa su morado por defecto.
+      var css = ".bubble{background:C;box-shadow:0 8px 24px rgba(R,.28)}.bubble .dot{box-shadow:0 0 0 2px C}"
+        + "input:focus,textarea:focus{outline-color:rgba(R,.16);border-color:C}button.primary{background:C}"
+        + "button.primary:hover{background:H}.msg.visitor{background:C}.drop-active{outline-color:C}";
+      css = css.replace(/C/g, chat.color).replace(/H/g, chat.hover).replace(/R/g, chat.rgb);
+      var theme = function () {
+        var host = document.querySelector("[data-codename-chat]");
+        if (!host || !host.shadowRoot) return false;
+        var st = document.createElement("style");
+        st.textContent = css;
+        host.shadowRoot.appendChild(st);
+        return true;
+      };
+      if (!theme()) {
+        var mo = new MutationObserver(function () { if (theme()) mo.disconnect(); });
+        mo.observe(document.body, { childList: true });
+      }
 
       // chat_start: el widget no emite eventos. Cuando el visitante deja su correo,
       // el widget guarda la sesión en localStorage; detectamos esa clave nueva.
