@@ -147,21 +147,6 @@
       else if (days === 1) el.textContent = "Mañana es Navidad";
     });
 
-    // ---- CTA fija en el teléfono: se oculta mientras hay otra CTA o el formulario en pantalla ----
-    var sticky = document.getElementById("sticky-cta");
-    var watch = document.querySelectorAll("[data-hide-sticky]");
-    if (sticky && "IntersectionObserver" in window && watch.length) {
-      var visible = new Set();
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { en.isIntersecting ? visible.add(en.target) : visible.delete(en.target); });
-        sticky.classList.toggle("translate-y-0", visible.size === 0);
-        sticky.classList.toggle("translate-y-[110%]", visible.size !== 0);
-        // Sube la burbuja del chat para que no quede tapada por la CTA fija
-        document.documentElement.style.setProperty("--chat-lift", visible.size === 0 ? sticky.offsetHeight + "px" : "0px");
-      });
-      watch.forEach(function (el) { io.observe(el); });
-    }
-
     // ---- Animación suave al hacer scroll (como la portada) ----
     if ("IntersectionObserver" in window) {
       var rv = new IntersectionObserver(function (entries) {
@@ -210,31 +195,18 @@
       var hasSession = function () { try { return !!localStorage.getItem(chatKey); } catch (e) { return false; } };
       var started = hasSession();
 
-      // Abrir el chat sin esperar al visitante (cerrado, tiende a ignorarse).
-      // Escritorio: se abre solo a los 8 s. Teléfono: el panel taparía la página,
-      // así que mostramos un aviso junto a la burbuja que lo abre al tocarlo.
+      // Escritorio: el chat se abre solo a los 8 s (cerrado, tiende a ignorarse).
+      // En el teléfono la entrada es la barra de chat (assets/chat-bar.js).
       // Una vez por sesión, y nunca si ya tiene una conversación.
       (function () {
         var KEY = "chat_nudged";
+        if (!matchMedia("(min-width: 768px)").matches) return;
         try { if (sessionStorage.getItem(KEY) || localStorage.getItem(chatKey)) return; } catch (e) { return; }
-        function root() { var h = document.querySelector("[data-codename-chat]"); return h && h.shadowRoot; }
-        function isOpen() { var r = root(); return !!(r && r.querySelector(".panel")); }
-        function open() { var r = root(), b = r && r.querySelector(".bubble"); if (b && !isOpen()) b.click(); }
-        function done() { try { sessionStorage.setItem(KEY, "1"); } catch (e) {} }
         setTimeout(function () {
-          if (!root() || isOpen()) return done();
-          done();
-          if (matchMedia("(min-width: 768px)").matches) return open();
-          var tip = document.createElement("div");
-          tip.className = "chat-nudge";
-          tip.innerHTML = '<button type="button" class="chat-nudge-open">¿Dudas? Escríbenos</button>'
-            + '<button type="button" class="chat-nudge-x" aria-label="Cerrar aviso">×</button>';
-          document.body.appendChild(tip);
-          tip.querySelector(".chat-nudge-open").onclick = function () { tip.remove(); open(); };
-          tip.querySelector(".chat-nudge-x").onclick = function () { tip.remove(); };
-          document.addEventListener("click", function (e) {
-            if (e.target.closest && e.target.closest("[data-codename-chat]")) tip.remove();
-          });
+          try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+          var h = document.querySelector("[data-codename-chat]"), r = h && h.shadowRoot;
+          var b = r && r.querySelector(".bubble");
+          if (b && !r.querySelector(".panel")) b.click();
         }, 8000);
       })();
       document.addEventListener("click", function (e) {
@@ -244,6 +216,16 @@
           if (hasSession()) { started = true; clearInterval(t); window.landingTrack("chat_start"); }
           else if (++n > 20) clearInterval(t);
         }, 500);
+      });
+    }
+
+    // ---- Barra de contacto/chat fija en el teléfono (assets/chat-bar.js) ----
+    if (window.initChatBar) {
+      window.initChatBar({
+        product: product,
+        endpoint: CONFIG.leadEndpoint,
+        chatKey: chat.workspace && chat.space ? "codename.chat." + chat.workspace + "." + chat.space : "",
+        hideOver: "#contacto",
       });
     }
   });
