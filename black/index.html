@@ -19,30 +19,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        blue:    { brand: '#003F91' },
-                        sky:     { brand: '#5DA9E9' },
-                        mint:    { brand: '#E5F4E3' },
-                        plum:    { brand: '#6D326D' },
-                        ink:     { 900: '#0B1B2B', 700: '#3A4A5A', 400: '#8A99A8', 200: '#E3E8EE', 50: '#F6F8FA' },
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        mono: ['"JetBrains Mono"', 'monospace'],
-                    },
-                    boxShadow: {
-                        soft: '0 1px 2px rgba(11,27,43,.04), 0 8px 24px rgba(11,27,43,.06)',
-                        card: '0 1px 3px rgba(11,27,43,.06), 0 12px 40px rgba(11,27,43,.08)',
-                    },
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind compilado (ver tailwind.config.js). Recompilar: npx tailwindcss@3.4.17 -i assets/landing.src.css -o assets/landing.css --minify -->
+    <link rel="stylesheet" href="/assets/landing.css?v=20261125a">
     <link rel="stylesheet" href="/assets/campaign.css?v=20261119d">
     <script src="/assets/chat-bar.js?v=1"></script>
     <script src="/assets/campaign.js?v=20261124b"></script>
@@ -77,19 +55,19 @@
         <section class="hero-wash relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24" data-hide-sticky>
             <div class="grid-faint pointer-events-none absolute inset-0"></div>
             <div class="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-8 lg:grid-cols-2">
-                <div>
+                <div class="flex flex-col items-start">
                     <span class="inline-flex items-center gap-2 rounded-full bg-plum-brand px-4 py-2 text-sm font-semibold text-white shadow-soft">
                         <span class="inline-block h-1.5 w-1.5 rounded-full bg-white"></span>
                         Oferta Black Friday: 10 días gratis
                     </span>
-                    <h1 class="mt-6 text-4xl font-bold tracking-tight text-ink-900 sm:text-5xl">
+                    <h1 class="order-1 mt-6 text-4xl font-bold tracking-tight text-ink-900 sm:text-5xl">
                         Que Black Friday no te deje <span class="text-blue-brand">sin stock</span> ni vendiendo <span class="text-blue-brand">bajo costo.</span>
                     </h1>
-                    <p class="mt-6 max-w-xl text-lg leading-relaxed text-ink-700">
+                    <p class="order-3 mt-6 max-w-xl text-lg sm:order-2 leading-relaxed text-ink-700">
                         ProductSentinel vigila tu inventario y tus precios en tiempo real. Te avisa antes de que un
                         producto se agote y protege tus precios para que nada se venda bajo costo, aunque nadie esté mirando.
                     </p>
-                    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <div class="order-2 mt-8 flex w-full flex-col gap-3 sm:order-3 sm:w-auto sm:flex-row">
                         <a href="https://apps.shopify.com/productsentinel" target="_blank" rel="noopener" data-track="install_click" data-loc="hero" class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-brand px-7 py-3.5 text-base font-medium text-white shadow-soft transition hover:bg-[#00347a] sm:w-auto">
                             Probar 10 días gratis
                         </a>
@@ -97,7 +75,7 @@
                             Agendar una demo
                         </a>
                     </div>
-                    <p class="mt-4 text-sm text-ink-700">Luego USD 50/mes · Cancelas cuando quieras · Soporte en español</p>
+                    <p class="order-2 mt-4 text-sm text-ink-700 sm:order-4">Luego USD 50/mes · Cancelas cuando quieras · Soporte en español</p>
                 </div>
 
                 <!-- Visual: reporte calmado de lo que protegió (demostramos, no prometemos) -->
