@@ -33,8 +33,10 @@
     videoPoster: "/assets/video/productsentinel-en-un-minuto.jpg",
     /** Precio del plan en USD/mes (el mismo de la Shopify App Store). null = "por confirmar". */
     monthlyUsd: 50,
-    /** TODO: oferta de Black Friday, ej. { monthlyUsd: 9, label: "Oferta Black Friday" }. null = sin oferta. */
-    blackFriday: null,
+    /** Oferta de Black Friday. Con trialDays muestra "N días gratis" y "luego USD X/mes";
+     *  con monthlyUsd muestra el precio rebajado. null = sin oferta.
+     *  OJO: los días tienen que coincidir con la prueba gratis configurada en la app de Shopify. */
+    blackFriday: { trialDays: 10, label: "Oferta Black Friday" },
     blackFridayEnds: "2026-12-01T03:00:00Z", // 30 nov 23:59, hora de Chile
     christmas: "2026-12-25T03:00:00Z", // 25 dic 00:00, hora de Chile
   };
@@ -106,6 +108,10 @@
     var bfActive = CONFIG.blackFriday && Date.now() < Date.parse(CONFIG.blackFridayEnds);
     document.querySelectorAll("[data-price]").forEach(function (el) {
       if (CONFIG.monthlyUsd == null) return; // deja el placeholder "por confirmar"
+      if (el.hasAttribute("data-bf") && bfActive && CONFIG.blackFriday.trialDays) {
+        el.innerHTML = CONFIG.blackFriday.trialDays + ' días <span class="price-unit">gratis</span>';
+        return;
+      }
       var show = el.hasAttribute("data-bf") && bfActive ? CONFIG.blackFriday.monthlyUsd : CONFIG.monthlyUsd;
       el.innerHTML = "USD " + show + '<span class="price-unit"> /mes</span>';
     });
@@ -113,7 +119,15 @@
       if (!bfActive || CONFIG.monthlyUsd == null) return;
       el.hidden = false;
       el.querySelectorAll("[data-bf-label]").forEach(function (l) { l.textContent = CONFIG.blackFriday.label; });
-      el.querySelectorAll("[data-old-price]").forEach(function (l) { l.textContent = "USD " + CONFIG.monthlyUsd + "/mes"; });
+      el.querySelectorAll("[data-old-price]").forEach(function (l) {
+        if (CONFIG.blackFriday.trialDays) l.hidden = true;
+        else l.textContent = "USD " + CONFIG.monthlyUsd + "/mes";
+      });
+    });
+    document.querySelectorAll("[data-trial-note]").forEach(function (el) {
+      if (!bfActive || !CONFIG.blackFriday.trialDays || CONFIG.monthlyUsd == null) return;
+      el.hidden = false;
+      el.textContent = "Luego USD " + CONFIG.monthlyUsd + "/mes. Cancelas cuando quieras.";
     });
 
     // ---- Video ----
