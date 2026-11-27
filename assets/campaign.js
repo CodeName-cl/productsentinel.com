@@ -7,8 +7,14 @@
  * o muestra un placeholder.
  *
  * Eventos (dataLayer + Meta): form_submit → Lead, chat_start → Contact,
- * schedule_click → Schedule, install_click → InstallClick (custom).
- * Todos llevan product="ps", cta_location y los utm_* de la visita.
+ * schedule_click → Schedule, install_click → InstallClick (custom),
+ * subscribe → CompleteRegistration, subscribe_cta → SubscribeClick (custom).
+ * Todos llevan product="ps", ab_variant, cta_location y los utm_* de la visita.
+ *
+ * Prueba A/B (un anuncio de Meta por versión):
+ *   - "instalar" (A): /black y /navidad, piden instalar la app.
+ *   - "lista" (B): /black/guia y /navidad/guia, piden el email a cambio del checklist
+ *     (/checklist). La versión va en <html data-variant="...">; sin el atributo es "instalar".
  */
 (function () {
   var CONFIG = {
@@ -43,6 +49,7 @@
   window.PS_CAMPAIGN = CONFIG;
 
   var product = "ps";
+  var variant = document.documentElement.getAttribute("data-variant") || "instalar";
   var KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
   var DEFAULT_UTM = { utm_source: "productsentinel.com", utm_medium: "landing", utm_campaign: "navidad-2026-ps" };
 
@@ -59,15 +66,17 @@
 
   // ---- dataLayer + helper de eventos ----
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(Object.assign({ landing_product: product }, utm));
+  window.dataLayer.push(Object.assign({ landing_product: product, ab_variant: variant }, utm));
   var META = {
     form_submit: ["track", "Lead"],
     chat_start: ["track", "Contact"],
     schedule_click: ["track", "Schedule"],
     install_click: ["trackCustom", "InstallClick"],
+    subscribe: ["track", "CompleteRegistration"],
+    subscribe_cta: ["trackCustom", "SubscribeClick"],
   };
   window.landingTrack = function (name, extra) {
-    var data = Object.assign({ product: product }, utm, extra || {});
+    var data = Object.assign({ product: product, ab_variant: variant }, utm, extra || {});
     window.dataLayer.push(Object.assign({ event: name }, data));
     var m = META[name];
     if (m && typeof window.fbq === "function") window.fbq(m[0], m[1], data);
@@ -174,6 +183,7 @@
     // ---- Formulario de lead → Google Sheet ----
     var form = document.getElementById("leadForm");
     if (form) initForm(form);
+    document.querySelectorAll("form[data-subscribe-form]").forEach(initSubscribe);
 
     // ---- Chat ----
     var chat = CONFIG.chat;
@@ -234,7 +244,8 @@
     }
 
     // ---- Barra de contacto/chat fija en el teléfono (assets/chat-bar.js) ----
-    if (window.initChatBar) {
+    // Sin barra en páginas que ya tienen el email (el checklist): <html data-no-chatbar>.
+    if (window.initChatBar && !document.documentElement.hasAttribute("data-no-chatbar")) {
       window.initChatBar({
         product: product,
         endpoint: CONFIG.leadEndpoint,
@@ -310,6 +321,63 @@
         form.hidden = true;
         done.hidden = false;
         done.focus();
+      });
+    });
+  }
+
+  /* Versión "lista" de la prueba A/B: solo el email, a cambio del checklist.
+   * Va a la misma planilla de leads, con la pregunta "Suscripción" para distinguirlo.
+   * El aviso de éxito es el elemento [data-subscribe-done] más cercano al formulario. */
+  function initSubscribe(form) {
+    var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var input = form.querySelector('input[type="email"]');
+    var box = form.closest("[data-subscribe]") || form.parentNode;
+    var err = box.querySelector("[data-form-error]");
+    var done = box.querySelector("[data-subscribe-done]");
+    var started = false;
+
+    input.addEventListener("focus", function () {
+      if (started) return;
+      started = true;
+      window.landingTrack("subscribe_start", { cta_location: form.getAttribute("data-loc") || "" });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var email = input.value.trim();
+      var bad = !EMAIL.test(email);
+      input.setAttribute("aria-invalid", bad ? "true" : "false");
+      if (err) err.hidden = !bad;
+      if (bad) { input.focus(); return; }
+
+      var payload = Object.assign({
+        product: product,
+        name: "",
+        email: email,
+        store_url: "",
+        shopify_plus: "",
+        qualifier: { question: "Suscripción", answer: "Checklist temporada alta (" + (form.getAttribute("data-loc") || "") + ")" },
+        landing_url: location.origin + location.pathname,
+        referrer: document.referrer || "",
+        submitted_at: new Date().toISOString(),
+        website: String((form.querySelector('input[name="website"]') || {}).value || ""), // campo trampa antispam
+      }, utm);
+
+      var btn = form.querySelector("button[type=submit]");
+      btn.disabled = true;
+      btn.textContent = "Enviando…";
+
+      var send = CONFIG.leadEndpoint
+        ? fetch(CONFIG.leadEndpoint, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload), keepalive: true }).catch(function () {})
+        : Promise.resolve(console.warn("[landing] leadEndpoint vacío; payload:", payload));
+
+      window.landingTrack("subscribe", { cta_location: form.getAttribute("data-loc") || "" });
+      try { localStorage.setItem("ps_subscribed", "1"); } catch (e2) {}
+
+      send.finally(function () {
+        form.hidden = true;
+        form.style.display = "none"; // la clase flex del formulario le gana a [hidden]
+        if (done) { done.hidden = false; done.focus(); }
       });
     });
   }
